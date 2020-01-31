@@ -15,7 +15,7 @@ function changeTableElements(data){
 // a callback function to later change DOM elements.
 function getInfoFromAPI (pokemon, eventFunction){
     // Completes url with the pokemon name or pokedex number.
-    var apiURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
+    var apiURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon.toLowerCase();
     // Creates request object
     const request = new Request(apiURL, {method: "GET", headers: {"Content-Type": "application/json"}});
     fetch(request)
