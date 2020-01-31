@@ -2,17 +2,25 @@ function getText(element) {
     return element.value;
 }
 
+// Changes DOM's elements with data fetched from API.
 function changeTableElements(data){
     document.getElementById("pokemonPic").src = data["sprites"]["front_shiny"];
+    // If number has less than 3 digits will fill with zeroes to the left
     document.getElementById("pokedexNumber").textContent = data["id"].toString().padStart(3, '0');
     document.getElementById("pokemonName").textContent = capitalizeFirstLetter(data["name"]);
 }
 
+// Fetches data from the PokeAPI
+// Recieves the pokemon name (or pokedex number) to search and
+// a callback function to later change DOM elements.
 function getInfoFromAPI (pokemon, eventFunction){
+    // Completes url with the pokemon name or pokedex number.
     var apiURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
+    // Creates request object
     const request = new Request(apiURL, {method: "GET", headers: {"Content-Type": "application/json"}});
     fetch(request)
         .then(response => {
+            // If response status is OK.
             if(response.status === 200){
                 return response.json();
             }
@@ -21,6 +29,7 @@ function getInfoFromAPI (pokemon, eventFunction){
             }
         })
         .then(response => {
+            // When data is actually ready to use.
             eventFunction(response)
         }).catch(error => {
             console.log(error)
