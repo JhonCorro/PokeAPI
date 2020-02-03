@@ -14,15 +14,14 @@ function getStatsData(data) {
     return stats;
 }
 
-// Creates DOM's elements to display stats
+// Creates DOM's elements to display stats.
 function displayStats(data) {
     function createElements() {
         var rowDiv = document.createElement("div");
         rowDiv.setAttribute("class", "row justify-content-md-center");
         var firstColDiv = document.createElement("div");
         firstColDiv.setAttribute("class", "col-3")
-        var secondColDiv = document.createElement("div");
-        secondColDiv.setAttribute("class", "col-3")
+        var secondColDiv = firstColDiv.cloneNode(true);
         var nameSpan = document.createElement("span");
         nameSpan.setAttribute("name", "statName");
         var valueSpan = document.createElement("span");
