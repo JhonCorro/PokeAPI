@@ -10,44 +10,10 @@
 </head>
 
 <body>
-    <h1>Gotta catch 'em all!</h1>
-    <div class="input-group col-md-3 mb-3">
-        <input class="form-control form-control-md" id="searchBox" aria-label="Enter pokemon name" aria-describedby="button-addon2"
-            type="text" placeholder="Enter pokemon name">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button" id="button-addon2">Search!</button>
-        </div>
-    </div>
-    <div>&nbsp;</div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <img class="img-fluid" id="pokemonPic" alt="Queried pokemon!" src="">
-            </div>
-        </div>
-    </div>
     <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-3">
-                <span>Name</span>
-            </div>
-            <div class="col-3">
-                <span id="pokemonName"></span>
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="col-3">
-                <span>Pokedex number</span>
-            </div>
-            <div class="col-3">
-                <span id="pokedexNumber"></span>
-            </div>
-        </div>
-    </div>
-    <div class="container" id="statsContainer">
-        <div class="row justify-content-md-center">
-            <span>STATS</span>
-        </div>
+        <h1>Gotta catch 'em all!</h1>
+        <ul id="pokemon-list">
+        </ul>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
