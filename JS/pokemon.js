@@ -2,6 +2,23 @@ function getText(element) {
     return element.value;
 }
 
+// Check if queryString exists, and returns the parameter in the URL.
+function checkForQueryStrings() {
+    // Gets query string from current page URL.
+    const queryString = window.location.search;
+    console.log(queryString);
+    // Checks if query string is not an empty string.
+    if(!(queryString === "")) {
+        // Instantiates a new URLSearchParam with the query string.
+        const params = new URLSearchParams(queryString);
+        // Searches the pokemon parameter.
+        pokemon = params.get("pokemon");
+        return pokemon;
+    }else{
+        console.log("No query string in URL")
+    }
+}
+
 // Gets stat data from JSON result.
 function getStatsData(data) {
     // Empty stats object to be returned.
@@ -89,5 +106,11 @@ function buttonClick() {
     getInfoFromAPI(text, changeTableElements, displayStats);
 }
 
+function windowLoad(){
+    console.log(checkForQueryStrings());
+    getInfoFromAPI(checkForQueryStrings(), changeTableElements, displayStats);
+}
+
+window.addEventListener("load", windowLoad);
 var button = document.getElementById("button-addon2");
 button.addEventListener("click", buttonClick.bind(button))

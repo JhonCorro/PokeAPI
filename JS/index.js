@@ -3,12 +3,25 @@ function capitalizeFirstLetter(string) {
 }
 
 function createCard(data) {
+    /* <li class="card">
+        <a href="../HTML/pokemon.html?pokemon=<pokemon-name-here>" target="_blank">
+            <img class="card-image" id=<pokedex-number-here> src=<image-src-here>
+            <h2 class="card-title"><#pokedex-number-here></h2>
+            <p class="card-subtitle"><pokemon-name-here></p>
+        </a>
+       </li>
+    */
     var card = document.createElement("li");
     card.setAttribute("class", "card");
+    var imageLink = document.createElement("a");
+    imageLink.setAttribute("href", "../HTML/pokemon.html?pokemon=" + data.name);
+    imageLink.setAttribute("target", "_blank");
     var img = document.createElement("img");
     img.setAttribute("class", "card-image");
+    img.setAttribute("id", data.id)
     img.setAttribute("src", data.image);
-    card.appendChild(img);
+    imageLink.appendChild(img);
+    card.appendChild(imageLink);
     var pokedexNumber = document.createElement("h2");
     pokedexNumber.setAttribute("class", "card-title")
     pokedexNumber.textContent = "#" + data.id.toString().padStart(3, "0");
