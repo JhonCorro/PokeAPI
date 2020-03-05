@@ -6,7 +6,6 @@ function getText(element) {
 function checkForQueryStrings() {
     // Gets query string from current page URL.
     const queryString = window.location.search;
-    console.log(queryString);
     // Checks if query string is not an empty string.
     if(!(queryString === "")) {
         // Instantiates a new URLSearchParam with the query string.
@@ -73,28 +72,30 @@ function changeTableElements(data) {
 // Fetches data from the PokeAPI
 // Recieves the pokemon name (or pokedex number) to search and
 // a callback function to later change DOM elements.
-function getInfoFromAPI(pokemon, ...eventFunctions) {
-    // Completes url with the pokemon name or pokedex number.
-    var apiURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon.toLowerCase();
-    // Creates request object
-    const request = new Request(apiURL, { method: "GET", headers: { "Content-Type": "application/json" } });
-    fetch(request)
-        .then(response => {
-            // If response status is OK.
-            if (response.status === 200) {
-                return response.json();
-            }
-            else {
-                throw new Error("Something is wrong!");
-            }
-        })
-        .then(response => {
-            // When data is actually ready to use.
-            eventFunctions[0](response);
-            eventFunctions[1](response);
-        }).catch(error => {
-            console.log(error)
-        });
+function getInfoFromAPI(pokemon="", ...eventFunctions) {
+    if (pokemon !== "") {
+        // Completes url with the pokemon name or pokedex number.
+        var apiURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon.toLowerCase();
+        // Creates request object
+        const request = new Request(apiURL, { method: "GET", headers: { "Content-Type": "application/json" } });
+        fetch(request)
+            .then(response => {
+                // If response status is OK.
+                if (response.status === 200) {
+                    return response.json();
+                }
+                else {
+                    throw new Error("Something is wrong!");
+                }
+            })
+            .then(response => {
+                // When data is actually ready to use.
+                eventFunctions[0](response);
+                eventFunctions[1](response);
+            }).catch(error => {
+                console.log(error)
+            });
+    }
 }
 
 function capitalizeFirstLetter(string) {
@@ -107,7 +108,6 @@ function buttonClick() {
 }
 
 function windowLoad(){
-    console.log(checkForQueryStrings());
     getInfoFromAPI(checkForQueryStrings(), changeTableElements, displayStats);
 }
 
