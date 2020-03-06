@@ -51,7 +51,8 @@ function getAllInfoFromAPI(...eventFunctions) {
         // Completes url with the the first 151 pokemon.
         var apiURL = "https://pokeapi.co/api/v2/pokemon/" + i.toString();
         // Creates request object
-        const request = new Request(apiURL, { method: "GET", headers: { "Content-Type": "application/json" } });
+        const request = new Request(apiURL, { method: "GET", headers: { "Content-Type": "application/json",
+                                                                        "Access-Control-Allow-Origin": "*" } });
         promises.push(fetch(request)
             .then(response => {
                 // If response status is OK.
