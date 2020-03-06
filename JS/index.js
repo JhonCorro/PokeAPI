@@ -1,3 +1,13 @@
+function showLoadingIcon() {
+    document.getElementById("loading-icon-front").classList.add("show");
+    document.getElementById("loading-icon-back").classList.add("show");
+}
+
+function hideLoadingIcon() {
+    document.getElementById("loading-icon-front").classList.remove("show");
+    document.getElementById("loading-icon-back").classList.remove("show");
+}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -37,7 +47,7 @@ function createCard(data) {
 // Recieves a callback function to later display the pokemon on cards.
 function getAllInfoFromAPI(...eventFunctions) {
     const promises = []
-    for (let i = 1; i <= 151; i++){
+    for (let i = 1; i <= 151; i++) {
         // Completes url with the the first 151 pokemon.
         var apiURL = "https://pokeapi.co/api/v2/pokemon/" + i.toString();
         // Creates request object
@@ -62,12 +72,14 @@ function getAllInfoFromAPI(...eventFunctions) {
             }));
             var mainContainer = document.getElementById("pokemon-list");
             pokemon.forEach(element => mainContainer.appendChild(eventFunctions[0](element)))
+            eventFunctions[1]();
         })
         .catch(error => console.log(error));
 }
 
 function windowLoad() {
-    getAllInfoFromAPI(createCard);
+    showLoadingIcon();
+    getAllInfoFromAPI(createCard, hideLoadingIcon);
 }
 
 window.addEventListener("load", windowLoad);
